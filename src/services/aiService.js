@@ -28,6 +28,7 @@ function providerInfo(p) {
     keyPrefix: p.keyPrefix,
     defaultModel: p.defaultModel,
     models: p.models,
+    storageKey: p.storageKey,
   };
 }
 

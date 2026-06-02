@@ -17,8 +17,8 @@ const providerList = getProviders();
 const initialProvider = getCurrentProvider();
 
 export default function App() {
-  const [apiKeyInput, setApiKeyInput] = useState("");
-  const [showApiKeyDialog, setShowApiKeyDialog] = useState(!hasApiKey());
+  const [apiKeyInput, setApiKeyInput] = useState(localStorage.getItem(initialProvider.storageKey) || "");
+  const [showApiKeyDialog, setShowApiKeyDialog] = useState(true);
   const [selectedProviderId, setSelectedProviderId] = useState(initialProvider.id);
   const [isVerifyingKey, setIsVerifyingKey] = useState(false);
   const [keyError, setKeyError] = useState("");
@@ -44,7 +44,8 @@ export default function App() {
 
   const handleProviderChange = (id) => {
     setSelectedProviderId(id);
-    setApiKeyInput("");
+    const pInfo = providerList.find(p => p.id === id);
+    setApiKeyInput(localStorage.getItem(pInfo.storageKey) || "");
     setKeyError("");
     setProvider(id);
     setSelectedModel(getCurrentModel());
